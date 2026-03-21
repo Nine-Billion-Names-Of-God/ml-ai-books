@@ -21,6 +21,15 @@
 
 /* Reset */
 
+:root {
+    --page-gutter: clamp(16px, 3vw, 36px);
+    --page-max-width: 1120px;
+    --content-max-width: 740px;
+    --sidebar-width: 300px;
+    --surface: #faf8f2;
+    --surface-border: #ddd5c7;
+}
+
 body {
     background: #fff;
     font-style: normal;
@@ -33,6 +42,7 @@ body {
     padding: 0;
     text-align: left;
     position: relative;
+    overflow-x: hidden;
 }
 
 
@@ -158,8 +168,16 @@ h5 {
 }
 
 .section {
-    width: 600px;
-    margin-left: 40px;
+    position: relative;
+    box-sizing: border-box;
+    width: min(calc(100% - (2 * var(--page-gutter))), var(--page-max-width));
+    margin: 0 auto;
+    padding: clamp(24px, 4vw, 42px) 0 clamp(48px, 6vw, 72px);
+}
+
+.page_content {
+    max-width: var(--content-max-width);
+    width: 100%;
 }
 
 a { 
@@ -187,6 +205,7 @@ a:hover {
 /* Set the font size for Pygments */
 .highlight {
     font-size: 9pt;
+    overflow-x: auto;
 }
 
 /* Set the font size for code */
@@ -223,12 +242,31 @@ path {
 
 /* Table of contents, and margin notes */
 
-#toc, .marginnote, .marginequation {
-    position: absolute;
-    left: 680px;
-    width: 260px;
-    padding: 0;
-    margin: 0;
+#toc {
+    position: sticky;
+    top: 24px;
+    float: right;
+    box-sizing: border-box;
+    width: min(100%, var(--sidebar-width));
+    margin: 0 0 32px 32px;
+    padding: 18px 20px;
+    border: 1px solid var(--surface-border);
+    border-radius: 12px;
+    background: var(--surface);
+    box-shadow: 0 10px 30px rgba(28, 57, 80, 0.08);
+}
+
+.marginnote, .marginequation {
+    display: block;
+    float: right;
+    clear: right;
+    box-sizing: border-box;
+    width: min(300px, 42%);
+    margin: 10px 0 18px 28px;
+    padding: 12px 14px;
+    border-left: 3px solid #d2c6af;
+    border-radius: 0 8px 8px 0;
+    background: #f7f4ec;
 }
 
 .sidebar {
@@ -285,7 +323,6 @@ path {
 .marginnote {
     font-size: 9pt;
     color: #666;
-    display: inline-block;
 }
 
 .marginnote .MathJax {
@@ -305,14 +342,79 @@ path {
     color: #000;
 }
 
+.page_content table {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+img, svg, video {
+    max-width: 100%;
+    height: auto;
+}
+
+canvas {
+    max-width: 100%;
+}
+
+.page_nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px 18px;
+    flex-wrap: wrap;
+    margin: 0 0 28px 0;
+    padding: 14px 16px;
+    border: 1px solid var(--surface-border);
+    border-radius: 12px;
+    background: var(--surface);
+    box-shadow: 0 8px 24px rgba(28, 57, 80, 0.06);
+    font-family: "Helvetica", "Arial", sans-serif;
+    font-size: 11pt;
+    line-height: 1.4;
+}
+
+.page_nav_bottom {
+    margin: 40px 0 0 0;
+}
+
+.page_nav_links {
+    display: flex;
+    align-items: center;
+    gap: 10px 16px;
+    flex-wrap: wrap;
+}
+
+.page_nav_label {
+    color: #66737f;
+    font-size: 10pt;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.page_nav_link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #1C3950;
+    font-weight: 600;
+}
+
+.page_nav_link.disabled {
+    color: #8b96a0;
+    pointer-events: none;
+}
+
 /* Footer */
 
 .footer {
     position: relative;
     top: 0px;
     width: 100%;
-    height: 130px;
+    min-height: 130px;
+    height: auto;
     margin: 0;
+    padding-bottom: 18px;
     background-color: #1C3950;
 }
 
@@ -371,4 +473,74 @@ span.right_footer {
     padding-right: 3px;
     padding-bottom: 0px;
     padding-left: 3px;
+}
+
+@media (max-width: 1080px) {
+    #toc {
+        position: static;
+        float: none;
+        width: 100%;
+        margin: 0 0 28px 0;
+    }
+}
+
+@media (max-width: 900px) {
+    .marginnote, .marginequation {
+        float: none;
+        width: 100%;
+        margin: 16px 0;
+    }
+}
+
+@media (max-width: 720px) {
+    body {
+        font-size: 13.5pt;
+        line-height: 1.65;
+    }
+
+    h1 {
+        left: 20px;
+        right: 20px;
+        font-size: 28px;
+        white-space: normal;
+    }
+
+    h1.chapter_number {
+        margin-top: 12px;
+        font-size: 20px;
+    }
+
+    h1.chapter_title {
+        margin-top: 54px;
+        font-size: 28px;
+    }
+
+    h2 {
+        left: 20px;
+        right: 20px;
+        font-size: 28px;
+        white-space: normal;
+    }
+
+    .header {
+        height: 140px;
+    }
+
+    .nonumber_header {
+        height: 96px;
+    }
+
+    .page_nav {
+        padding: 12px 14px;
+    }
+
+    span.left_footer, span.right_footer {
+        left: 20px;
+        right: 20px;
+    }
+
+    span.left_footer {
+        width: auto;
+        padding-right: 110px;
+    }
 }
