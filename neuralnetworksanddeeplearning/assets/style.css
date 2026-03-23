@@ -33,7 +33,7 @@
 body {
     background: #fff;
     font-style: normal;
-    font: 15pt 'Georgia', 'Times New Roman', serif; 
+    font: 18pt 'Georgia', 'Times New Roman', serif; 
     line-height: 1.7;
     /* font-family: "Helvetica", "Arial", sans-serif; */
     color: #000;
@@ -131,7 +131,7 @@ h2 a {
 }
 
 p {
-    font: 15pt 'Georgia', 'Times New Roman', serif; 
+    font: 18pt 'Georgia', 'Times New Roman', serif; 
     line-height: 1.7;
     color: #333;
     margin: 0 0 1 0;
