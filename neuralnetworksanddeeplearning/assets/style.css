@@ -22,10 +22,8 @@
 /* Reset */
 
 :root {
-    --page-gutter: clamp(16px, 3vw, 36px);
-    --page-max-width: 1120px;
-    --content-max-width: 740px;
-    --sidebar-width: 300px;
+    --page-gutter: 16px;
+    --page-max-width: 1280px;
     --surface: #faf8f2;
     --surface-border: #ddd5c7;
 }
@@ -176,8 +174,8 @@ h5 {
 }
 
 .page_content {
-    max-width: var(--content-max-width);
     width: 100%;
+    max-width: none;
 }
 
 a { 
@@ -243,26 +241,16 @@ path {
 /* Table of contents, and margin notes */
 
 #toc {
-    position: sticky;
-    top: 24px;
-    float: right;
-    box-sizing: border-box;
-    width: min(100%, var(--sidebar-width));
-    margin: 0 0 32px 32px;
-    padding: 18px 20px;
-    border: 1px solid var(--surface-border);
-    border-radius: 12px;
-    background: var(--surface);
-    box-shadow: 0 10px 30px rgba(28, 57, 80, 0.08);
+    display: none;
 }
 
 .marginnote, .marginequation {
     display: block;
-    float: right;
-    clear: right;
+    float: none;
+    clear: both;
     box-sizing: border-box;
-    width: min(300px, 42%);
-    margin: 10px 0 18px 28px;
+    width: 100%;
+    margin: 20px 0;
     padding: 12px 14px;
     border-left: 3px solid #d2c6af;
     border-radius: 0 8px 8px 0;
@@ -475,24 +463,31 @@ span.right_footer {
     padding-left: 3px;
 }
 
-@media (max-width: 1080px) {
-    #toc {
-        position: static;
-        float: none;
-        width: 100%;
-        margin: 0 0 28px 0;
+@media (min-width: 640px) {
+    :root {
+        --page-gutter: 20px;
     }
 }
 
-@media (max-width: 900px) {
-    .marginnote, .marginequation {
-        float: none;
-        width: 100%;
-        margin: 16px 0;
+@media (min-width: 768px) {
+    :root {
+        --page-gutter: 24px;
     }
 }
 
-@media (max-width: 720px) {
+@media (min-width: 1024px) {
+    :root {
+        --page-gutter: 32px;
+    }
+}
+
+@media (min-width: 1280px) {
+    :root {
+        --page-gutter: 36px;
+    }
+}
+
+@media (max-width: 768px) {
     body {
         font-size: 13.5pt;
         line-height: 1.65;
